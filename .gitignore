@@ -1,0 +1,12 @@
+# 密钥与本地配置
+.env
+
+# 运行时产物
+logs/
+data/
+arcgate
+arcgate.exe
+*.test
+
+# ZCode 会话目录
+.zcode/
