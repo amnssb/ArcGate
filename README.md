@@ -1,6 +1,6 @@
 # ArcGate — 为 Obsidian Arc 设计的 QQ 群退群上报机器人
 
-> **本项目专为 [Obsidian Arc](https://github.com/)（Go + Vue 自部署 AI 聊天站）设计**，对接其 `/api/bot/departure` 机器人 Webhook 协议（协议全文见 ObsidianArc 仓库 `docs/admin/departures.md` 第五节）。它不是通用的 QQ 机器人框架——不做聊天、不做命令，只做一件事：**监听 QQ 群成员退群/被踢 → 上报站点封禁/删除账号并收回邀请奖励 → 把结果播报回群**。
+> **本项目专为 [Obsidian Arc](https://github.com/amnssb/ObsidianArc)（Go + Vue 自部署 AI 聊天站）设计**，对接其 `/api/bot/departure` 机器人 Webhook 协议（协议全文见 ObsidianArc 仓库 `docs/admin/departures.md` 第五节）。它不是通用的 QQ 机器人框架——不做聊天、不做命令，只做一件事：**监听 QQ 群成员退群/被踢 → 上报站点封禁/删除账号并收回邀请奖励 → 把结果播报回群**。
 
 Go 单文件单二进制，纯标准库、零第三方依赖；自带 Web 控制台、离线验收模拟器与容器部署方案。
 
