@@ -4,9 +4,13 @@
 # 运行时产物
 logs/
 data/
+.e2e/
 arcgate
 arcgate.exe
 *.test
 
 # ZCode 会话目录
 .zcode/
+
+# 构装备份
+*.exe~

@@ -1,0 +1,11 @@
+# 密钥与本地产物一律不进构建上下文
+.git
+.env
+logs/
+data/
+.e2e/
+napcat/
+arcgate
+arcgate.exe
+*.test
+*.md

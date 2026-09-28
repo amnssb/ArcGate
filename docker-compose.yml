@@ -1,0 +1,40 @@
+# ArcGate + NapCat 一键部署。
+# 用法：
+#   1. cp .env.example .env 并填写 OBSIDIAN_ARC_URL / OBSIDIAN_ARC_BOT_TOKEN
+#   2. docker compose up -d --build
+#   3. 打开 http://<宿主机>:6099 扫码登录机器人 QQ（登录完成后可去掉该端口映射）
+#   4. NapCat WebUI → 网络配置，新建两项（详见 README 第 8 节）：
+#        HTTP 服务器：Host 0.0.0.0，Port 3000
+#        HTTP 上报：URL http://arcgate:3002/onebot/event
+#        两处 Token 填同一个值，并同步到 .env 的 ARC_ONEBOT_ACCESS_TOKEN
+#   5. 打开 http://<宿主机>:3002 初始化面板账号密码
+services:
+  arcgate:
+    build: .
+    container_name: arcgate
+    restart: unless-stopped
+    ports:
+      - "3002:3002" # 面板 + NapCat 上报入口（公网部署建议只走反代）
+    env_file:
+      - .env
+    environment:
+      # 容器内地址与本地不同，强制覆盖，不要在 .env 里改这两项
+      ARC_LISTEN_ADDR: 0.0.0.0:3002
+      ARC_ONEBOT_API_URL: http://napcat:3000
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+
+  napcat:
+    image: mlikiowa/napcat-docker:latest
+    container_name: napcat
+    restart: unless-stopped
+    environment:
+      - NAPCAT_GID=1000
+      - NAPCAT_UID=1000
+    ports:
+      - "6099:6099" # NapCat WebUI：扫码登录与网络配置；登录稳定后建议关闭此映射
+    volumes:
+      - ./napcat/QQ:/app/qq
+      - ./napcat/config:/app/napcat/config
+      - ./napcat/data:/app/napcat/data
